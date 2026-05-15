@@ -39,8 +39,10 @@ function SearchPage() {
 			</div>
 
 			<div className="book-search-results">
+				{error && <p>Sorry! {error}</p>}
+				{isLoading && <p>Please, wait a moment</p>}
 				{result.map((book) => (
-					<BookCard key={book.id} book={book} />
+					<BookCard key={book.key} book={book} />
 				))}
 			</div>
 		</>

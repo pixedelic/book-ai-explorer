@@ -34,20 +34,25 @@ function BookPage() {
 	}, [id])
 
 	return (
-		book && 
 		<div className="book-detail">
-			{book.covers && <img src={`https://covers.openlibrary.org/b/id/${book.covers[0]}-L.jpg`} alt={book.title} />}
-			<p>Title: {book.title}</p>
-			<p>Year: {book.first_publish_date}</p>
-			<p>Description:
-				{typeof book.description === 'string' 
-				? book.description 
-				: book.description?.value}
-			</p>
-			<AIAnalysis 
-				title={book.title}
-				author={author}
-			/>
+			{error && <p>Sorry! {error}</p>}
+			{isLoading && <p>Please, wait a moment</p>}
+      {book && (
+				<>
+					{book.covers && <img src={`https://covers.openlibrary.org/b/id/${book.covers[0]}-L.jpg`} alt={book.title} />}
+					<p>Title: {book.title}</p>
+					<p>Year: {book.first_publish_date}</p>
+					<p>Description:
+						{typeof book.description === 'string' 
+						? book.description 
+						: book.description?.value}
+					</p>
+					<AIAnalysis 
+						title={book.title}
+						author={author}
+					/>
+				</>
+			)}
 		</div>
 	)
 }
