@@ -1,6 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
+import { Button } from '@/components/ui/button'
 
 const client = new Anthropic({
 	apiKey: import.meta.env.VITE_ANTHROPIC_API_KEY,
@@ -50,16 +51,12 @@ function AIAnalysis({
 		<>
 			{error && <p className="mt-4 text-red-500 text-sm">{error}</p>}
 			{analysis && (
-			<div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-				<div className="text-sm text-gray-700 prose">
-						<ReactMarkdown>{analysis}</ReactMarkdown>
-				</div>
-			</div>
+			<ReactMarkdown>{analysis}</ReactMarkdown>
 			)}
-			<button
-				className="analyse-button"
+			<Button
+				className="analyse-button w-full"
 				onClick={handleAnalysis}
-			>{isLoading ? `Loading...` : `Analyse this book`}</button>
+			>{isLoading ? `Loading...` : `Analyse this book`}</Button>
 		</>
 	)
 }

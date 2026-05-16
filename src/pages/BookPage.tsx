@@ -2,6 +2,14 @@ import { useEffect, useState } from 'react'
 import { useParams, useSearchParams } from "react-router";
 import { type BookDetail } from '../types/book'
 import AIAnalysis from '../components/AIAnalysis'
+import {
+	Card,
+	CardDescription,
+	CardContent,
+	CardHeader,
+	CardTitle,
+	CardFooter
+} from "@/components/ui/card"
 
 function BookPage() {
 	const { id } = useParams()
@@ -34,24 +42,34 @@ function BookPage() {
 	}, [id])
 
 	return (
-		<div className="book-detail">
+		<div className="book-detail my-16">
 			{error && <p>Sorry! {error}</p>}
 			{isLoading && <p>Please, wait a moment</p>}
       {book && (
-				<>
-					{book.covers && <img src={`https://covers.openlibrary.org/b/id/${book.covers[0]}-L.jpg`} alt={book.title} />}
-					<p>Title: {book.title}</p>
-					<p>Year: {book.first_publish_date}</p>
-					<p>Description:
-						{typeof book.description === 'string' 
-						? book.description 
-						: book.description?.value}
-					</p>
-					<AIAnalysis 
-						title={book.title}
-						author={author}
-					/>
-				</>
+				<div className='flex max-w-4xl m-auto gap-8 items-start'>
+					<div className='flex flex-col gap-4 w-2/5 bg-gray-100'>
+						{book.covers && <img src={`https://covers.openlibrary.org/b/id/${book.covers[0]}-L.jpg`} alt={book.title} />}
+					</div>
+					<Card className='flex flex-col gap-4 w-3/5'>
+						<CardHeader>
+							<CardTitle>Title: {book.title}</CardTitle>
+							<CardDescription>Year: {book.first_publish_date}</CardDescription>
+						</CardHeader>
+						<CardContent>
+							<p>Description:
+								{typeof book.description === 'string' 
+								? book.description 
+								: book.description?.value}
+							</p>
+						</CardContent>
+						<CardFooter className="flex-col gap-2">
+							<AIAnalysis 
+								title={book.title}
+								author={author}
+							/>
+						</CardFooter>
+					</Card>
+				</div>
 			)}
 		</div>
 	)

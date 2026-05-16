@@ -28,8 +28,8 @@ function SearchPage() {
 
 	return (
 		<>
-			<div className="welcome-area justify-center p-6">
-					<h1 className="text-2xl font-bold text-gray-800 mb-6">Welcome to BaBeLib</h1>
+			<div className="welcome-area flex flex-col items-center p-6 gap-y-6 my-8">
+					<h1 className="flex text-5xl font-bold text-gray-800">Welcome to BaBeLib</h1>
 					<p>BaBeLib helps you find information about any book published anywhere in the world.</p>
 					<SearchBar
 							query={query}
@@ -38,7 +38,7 @@ function SearchPage() {
 					/>
 			</div>
 
-			<div className="book-search-results">
+			<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
 				{error && <p>Sorry! {error}</p>}
 				{isLoading && <p>Please, wait a moment</p>}
 				{result.map((book) => (

@@ -1,3 +1,6 @@
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+
 type SearchBarProps = {
     query: string
     onChange: (value: string) => void
@@ -10,18 +13,18 @@ function SearchBar( {
     onSearch
 } : SearchBarProps) {
     return(
-        <div className="search-bar-mask">
-            <input
+        <div className="search-bar-mask flex gap-4">
+            <Input
                 type="search"
-                className="search-input"
+                className="search-input px-2 py-2 min-w-md"
                 value={query}
                 onChange={(e) => onChange(e.target.value)}
                 placeholder="Enter your text here..."
             />
-            <button
+            <Button
                 className="search-button"
                 onClick={onSearch}
-            >Search</button>
+            >Search</Button>
         </div>
     )
 }
