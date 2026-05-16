@@ -35,16 +35,27 @@ function SearchPage() {
 							query={query}
 							onChange={setQuery}
 							onSearch={onSearch}
+							isLoading={isLoading}
 					/>
 			</div>
 
-			<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
-				{error && <p>Sorry! {error}</p>}
-				{isLoading && <p>Please, wait a moment</p>}
-				{result.map((book) => (
-					<BookCard key={book.key} book={book} />
-				))}
-			</div>
+			{error && <p>Sorry! {error}</p>}
+			{isLoading ?
+				<div className="loading-message flex flex-col items-center p-6 gap-y-6 my-8">
+					<p>Please, wait a moment</p>
+				</div>
+			:
+				result.length ?
+					<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
+					{result.map((book) => (
+						<BookCard key={book.key} book={book} />
+					))}
+					</div>
+					:
+					<div className="loading-message flex flex-col items-center p-6 gap-y-6 my-8">
+						<p>No results, sorry.</p>
+					</div>
+			}
 		</>
 	)
 }

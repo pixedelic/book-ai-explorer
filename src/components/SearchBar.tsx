@@ -5,12 +5,14 @@ type SearchBarProps = {
     query: string
     onChange: (value: string) => void
     onSearch: () => void
+    isLoading: boolean
 }
 
 function SearchBar( {
     query,
     onChange,
-    onSearch
+    onSearch,
+    isLoading
 } : SearchBarProps) {
     return(
         <div className="search-bar-mask flex gap-4">
@@ -19,12 +21,14 @@ function SearchBar( {
                 className="search-input px-2 py-2 min-w-md"
                 value={query}
                 onChange={(e) => onChange(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && onSearch()}
                 placeholder="Enter your text here..."
             />
             <Button
                 className="search-button"
                 onClick={onSearch}
-            >Search</Button>
+                disabled={isLoading}
+            >{isLoading ? `Loading...` : `Search`}</Button>
         </div>
     )
 }

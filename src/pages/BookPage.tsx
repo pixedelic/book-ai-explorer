@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react'
-import { useParams, useSearchParams } from "react-router";
+import { useParams, useSearchParams, useNavigate } from "react-router";
 import { type BookDetail } from '../types/book'
 import AIAnalysis from '../components/AIAnalysis'
+import { Button } from '@/components/ui/button'
 import {
 	Card,
 	CardDescription,
 	CardContent,
 	CardHeader,
 	CardTitle,
-	CardFooter
+	CardFooter,
 } from "@/components/ui/card"
 
 function BookPage() {
@@ -18,6 +19,7 @@ function BookPage() {
 	const [book, setBook] = useState<BookDetail | null>(null)
 	const [searchParams] = useSearchParams()
 	const author = searchParams.get('author') ?? ''
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		const fetchBook = async () => {
@@ -47,6 +49,7 @@ function BookPage() {
 			{isLoading && <p>Please, wait a moment</p>}
       {book && (
 				<div className='flex max-w-4xl m-auto gap-8 items-start'>
+					<Button variant="ghost" onClick={() => navigate(-1)}>← Back</Button>
 					<div className='flex flex-col gap-4 w-2/5 bg-gray-100'>
 						{book.covers && <img src={`https://covers.openlibrary.org/b/id/${book.covers[0]}-L.jpg`} alt={book.title} />}
 					</div>

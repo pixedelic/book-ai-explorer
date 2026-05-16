@@ -56,7 +56,9 @@ function AIAnalysis({
 			<Button
 				className="analyse-button w-full"
 				onClick={handleAnalysis}
-			>{isLoading ? `Loading...` : `Analyse this book`}</Button>
+			>
+				{isLoading ? 'Analysing...' : analysis ? 'Regenerate analysis' : 'Analyse this book'}
+			</Button>
 		</>
 	)
 }
