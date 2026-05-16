@@ -8,11 +8,13 @@ function SearchPage() {
 	const [result, setResults] = useState<Book[]>([])
 	const [isLoading, setIsLoading] = useState(false)
 	const [error, setError] = useState<string | null>(null)
+	const [hasSearched, setHasSearched] = useState(false)
 
   const onSearch = async () => {
 		try {
 			setIsLoading(true)
 			setError(null)
+			setHasSearched(true)
 	
 			const response = await fetch(`https://openlibrary.org/search.json?q=${query}&limit=12`)
 			const data = await response.json()
@@ -52,6 +54,7 @@ function SearchPage() {
 					))}
 					</div>
 					:
+					hasSearched &&
 					<div className="loading-message flex flex-col items-center p-6 gap-y-6 my-8">
 						<p>No results, sorry.</p>
 					</div>
